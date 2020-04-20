@@ -217,7 +217,9 @@ void run(statetype* state){
 		newstate->IDEX.pcplus1 = state->IFID.pcplus1;
 
 		// decode instruction and store in ID/EX pipeline buffer
-		newstate->IDEX.readregA = state->reg[field0(state->IFID.instr)];
+		// this is wrong because lw, sw, beq take different fields then add, nand
+        // only sign extend for lw, sw, beq. No offset for ADD NAND?
+		newstate->IDEX.readregA = state->reg[field0(state->IFID.instr)]; // state->reg[] ?
 		newstate->IDEX.readregB = state->reg[field1(state->IFID.instr)];
 		newstate->IDEX.offset = signextend(field2(state->IFID.instr));
 
@@ -241,10 +243,12 @@ void run(statetype* state){
 		// LW or SW
 		else if(opcode(state->IDEX.instr) == LW || opcode(state->IDEX.instr) == SW){
 			newstate->EXMEM.aluresult = state->IDEX.readregB + state->IDEX.offset;
+			// do the storing or loading
 		}
 		// BEQ
 		else if(opcode(state->IDEX.instr) == BEQ){
 			newstate->EXMEM.aluresult = (state->IDEX.readregA == state->IDEX.readregB);
+			// ZD
 		}else{
 			newstate->EXMEM.aluresult = 0;
 		}
