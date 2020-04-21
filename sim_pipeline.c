@@ -176,17 +176,17 @@ void run(statetype* state){
 
 	// Primary loop
 	while(1){
-		printstate(state);
+//		printstate(state);
 
 		/* check for halt */
 		if(opcode(state->MEMWB.instr) == HALT){
 			state->retired++;
-			printf("machine halted\n");
-			printf("total of %d cycles executed\n", state->cycles);
-			printf("total of %d instructions fetched\n", state->fetched);
-			printf("total of %d instructions retired\n", state->retired);
-			printf("total of %d branches executed\n", state->branches);
-			printf("total of %d branch mispredictions\n", state->mispreds);
+//			printf("machine halted\n");
+//			printf("total of %d cycles executed\n", state->cycles);
+//			printf("total of %d instructions fetched\n", state->fetched);
+//			printf("total of %d instructions retired\n", state->retired);
+//			printf("total of %d branches executed\n", state->branches);
+//			printf("total of %d branch mispredictions\n", state->mispreds);
 			exit(0);
 		}
 
@@ -276,9 +276,14 @@ void run(statetype* state){
 		// BEQ
 		else if(opcode(state->EXMEM.instr) == BEQ){
 			if(state->EXMEM.aluresult){
+			    printf("test");
 				newstate->pc = state->EXMEM.branchtarget;
 				newstate->branches++;
 			}
+            if(state->EXMEM.aluresult == 0){
+                printf("test");
+            }
+            printf("\n");
 		}else{
 			newstate->MEMWB.writedata = 0;
 		}
