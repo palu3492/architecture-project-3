@@ -1,0 +1,7 @@
+sim_pipeline.c is pipelined simulator
+- use 'make' to compile
+- use ''./sim_pipeline program.mc' to run
+
+Makefile compiles sim_pipeline.c
+
+'tests' directory holds 3 tests
