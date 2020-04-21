@@ -1,0 +1,222 @@
+@@@
+state before cycle 0 starts
+pc 0
+data memory:
+datamem[ 0 ] 8912898
+datamem[ 1 ] 25165824
+datamem[ 2 ] 12345
+registers:
+reg[ 0 ] 0
+reg[ 1 ] 0
+reg[ 2 ] 0
+reg[ 3 ] 0
+reg[ 4 ] 0
+reg[ 5 ] 0
+reg[ 6 ] 0
+reg[ 7 ] 0
+IFID:
+instruction noop 0 0 0
+pcplus1 0
+IDEX:
+instruction noop 0 0 0
+pcplus1 0
+readregA 0
+readregB 0
+offset 0
+EXMEM:
+instruction noop 0 0 0
+branchtarget 0
+aluresult 0
+readreg 0
+MEMWB:
+instruction noop 0 0 0
+writedata 0
+WBEND:
+instruction noop 0 0 0
+writedata 0
+@@@
+state before cycle 1 starts
+pc 1
+data memory:
+datamem[ 0 ] 8912898
+datamem[ 1 ] 25165824
+datamem[ 2 ] 12345
+registers:
+reg[ 0 ] 0
+reg[ 1 ] 0
+reg[ 2 ] 0
+reg[ 3 ] 0
+reg[ 4 ] 0
+reg[ 5 ] 0
+reg[ 6 ] 0
+reg[ 7 ] 0
+IFID:
+instruction lw 1 0 2
+pcplus1 1
+IDEX:
+instruction noop 0 0 0
+pcplus1 0
+readregA 0
+readregB 0
+offset 0
+EXMEM:
+instruction noop 0 0 0
+branchtarget 0
+aluresult 0
+readreg 0
+MEMWB:
+instruction noop 0 0 0
+writedata 0
+WBEND:
+instruction noop 0 0 0
+writedata 0
+@@@
+state before cycle 2 starts
+pc 2
+data memory:
+datamem[ 0 ] 8912898
+datamem[ 1 ] 25165824
+datamem[ 2 ] 12345
+registers:
+reg[ 0 ] 0
+reg[ 1 ] 0
+reg[ 2 ] 0
+reg[ 3 ] 0
+reg[ 4 ] 0
+reg[ 5 ] 0
+reg[ 6 ] 0
+reg[ 7 ] 0
+IFID:
+instruction halt 0 0 0
+pcplus1 2
+IDEX:
+instruction lw 1 0 2
+pcplus1 1
+readregA 0
+readregB 0
+offset 2
+EXMEM:
+instruction noop 0 0 0
+branchtarget 0
+aluresult 0
+readreg 0
+MEMWB:
+instruction noop 0 0 0
+writedata 0
+WBEND:
+instruction noop 0 0 0
+writedata 0
+@@@
+state before cycle 3 starts
+pc 3
+data memory:
+datamem[ 0 ] 8912898
+datamem[ 1 ] 25165824
+datamem[ 2 ] 12345
+registers:
+reg[ 0 ] 0
+reg[ 1 ] 0
+reg[ 2 ] 0
+reg[ 3 ] 0
+reg[ 4 ] 0
+reg[ 5 ] 0
+reg[ 6 ] 0
+reg[ 7 ] 0
+IFID:
+instruction add 12345 0 0
+pcplus1 3
+IDEX:
+instruction halt 0 0 0
+pcplus1 2
+readregA 0
+readregB 0
+offset 0
+EXMEM:
+instruction lw 1 0 2
+branchtarget 3
+aluresult 2
+readreg 0
+MEMWB:
+instruction noop 0 0 0
+writedata 0
+WBEND:
+instruction noop 0 0 0
+writedata 0
+@@@
+state before cycle 4 starts
+pc 4
+data memory:
+datamem[ 0 ] 8912898
+datamem[ 1 ] 25165824
+datamem[ 2 ] 12345
+registers:
+reg[ 0 ] 0
+reg[ 1 ] 0
+reg[ 2 ] 0
+reg[ 3 ] 0
+reg[ 4 ] 0
+reg[ 5 ] 0
+reg[ 6 ] 0
+reg[ 7 ] 0
+IFID:
+instruction add 0 0 0
+pcplus1 4
+IDEX:
+instruction add 12345 0 0
+pcplus1 3
+readregA 0
+readregB 0
+offset 12345
+EXMEM:
+instruction halt 0 0 0
+branchtarget 2
+aluresult 0
+readreg 0
+MEMWB:
+instruction lw 1 0 2
+writedata 12345
+WBEND:
+instruction noop 0 0 0
+writedata 0
+@@@
+state before cycle 5 starts
+pc 5
+data memory:
+datamem[ 0 ] 8912898
+datamem[ 1 ] 25165824
+datamem[ 2 ] 12345
+registers:
+reg[ 0 ] 0
+reg[ 1 ] 12345
+reg[ 2 ] 0
+reg[ 3 ] 0
+reg[ 4 ] 0
+reg[ 5 ] 0
+reg[ 6 ] 0
+reg[ 7 ] 0
+IFID:
+instruction add 0 0 0
+pcplus1 5
+IDEX:
+instruction add 0 0 0
+pcplus1 4
+readregA 0
+readregB 0
+offset 0
+EXMEM:
+instruction add 12345 0 0
+branchtarget 12348
+aluresult 0
+readreg 0
+MEMWB:
+instruction halt 0 0 0
+writedata 0
+WBEND:
+instruction lw 1 0 2
+writedata 12345
+machine halted
+total of 5 cycles executed
+total of 2 instructions fetched
+total of 2 instructions retired
+total of 0 branches executed
+total of 0 branch mispredictions

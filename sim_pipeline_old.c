@@ -176,17 +176,17 @@ void run(statetype* state){
 
 	// Primary loop
 	while(1){
-		printstate(state);
+//		printstate(state);
 
 		/* check for halt */
 		if(opcode(state->MEMWB.instr) == HALT){
 			state->retired++;
-			printf("machine halted\n");
-			printf("total of %d cycles executed\n", state->cycles);
-			printf("total of %d instructions fetched\n", state->fetched);
-			printf("total of %d instructions retired\n", state->retired);
-			printf("total of %d branches executed\n", state->branches);
-			printf("total of %d branch mispredictions\n", state->mispreds);
+//			printf("machine halted\n");
+//			printf("total of %d cycles executed\n", state->cycles);
+//			printf("total of %d instructions fetched\n", state->fetched);
+//			printf("total of %d instructions retired\n", state->retired);
+//			printf("total of %d branches executed\n", state->branches);
+//			printf("total of %d branch mispredictions\n", state->mispreds);
 			exit(0);
 		}
 
@@ -217,16 +217,11 @@ void run(statetype* state){
 		newstate->IDEX.pcplus1 = state->IFID.pcplus1;
 
 		// decode instruction and store in ID/EX pipeline buffer
+		// this is wrong because lw, sw, beq take different fields then add, nand
+        // only sign extend for lw, sw, beq. No offset for ADD NAND?
 		newstate->IDEX.readregA = state->reg[field0(state->IFID.instr)];
 		newstate->IDEX.readregB = state->reg[field1(state->IFID.instr)];
 		newstate->IDEX.offset = signextend(field2(state->IFID.instr));
-		
-		// perform load stall if next instruction in pipeline is LW
-		// and instruction in ID stage depends on LW being completed
-		if((opcode(state->IFID.instr) == ADD && opcode(state->IDEX.instr) == LW) && (field2(state->IFID.instr) == field2(state->IDEX.instr))){
-			newstate->pc = state->pc;
-			newstate->IFID.instr = NOOPINSTRUCTION;
-		}
 
 		/* ------------------ EX  stage ------------------ */
 
@@ -248,10 +243,12 @@ void run(statetype* state){
 		// LW or SW
 		else if(opcode(state->IDEX.instr) == LW || opcode(state->IDEX.instr) == SW){
 			newstate->EXMEM.aluresult = state->IDEX.readregB + state->IDEX.offset;
+			// do the storing or loading
 		}
 		// BEQ
 		else if(opcode(state->IDEX.instr) == BEQ){
 			newstate->EXMEM.aluresult = (state->IDEX.readregA == state->IDEX.readregB);
+			// ZD
 		}else{
 			newstate->EXMEM.aluresult = 0;
 		}
@@ -279,15 +276,10 @@ void run(statetype* state){
 		// BEQ
 		else if(opcode(state->EXMEM.instr) == BEQ){
 			if(state->EXMEM.aluresult){
-				// flush pipeline
 				newstate->pc = state->EXMEM.branchtarget;
-				newstate->IFID.instr = NOOPINSTRUCTION;
-				newstate->IDEX.instr = NOOPINSTRUCTION;
-				newstate->EXMEM.instr = NOOPINSTRUCTION;
-				newstate->mispreds++;
-			}else{
 				newstate->branches++;
 			}
+            printf("\n");
 		}else{
 			newstate->MEMWB.writedata = 0;
 		}
